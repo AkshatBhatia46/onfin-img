@@ -133,21 +133,21 @@ export function ComplianceGraphModal({
   const libraryItems: LibraryItem[] = [
     {
       content:
-        "Section 1.2: Environmental Compliance\nCompanies must adhere to strict environmental guidelines, including waste management, emissions control, and sustainable practices. Regular audits and reporting are mandatory.",
+        "3.1. General Verification Process: The CIP must include risk-based procedures to verify the identity of each customer using the information obtained. Verification must occur within a reasonable time before or after an account is opened.",
       source: "Environmental Protection Act",
       pageNo: 15,
       lastUpdated: "2025-01-15",
     },
     {
       content:
-        "Chapter 3: Data Privacy and Protection\nOrganizations handling personal data must implement robust security measures, obtain explicit consent for data collection, and provide transparency in data usage. Violations may result in severe penalties.",
+        "Customer Identification Program: Minimum Requirements (§103.122(b)) 1.1. In General: Each broker-dealer must establish, document, and maintain a written Customer Identification Program (CIP) as part of its required anti-money laundering (AML) program. The CIP must enable the broker-dealer to form a reasonable belief that it knows the true identity of each customer.",
       source: "Data Protection Regulation",
       pageNo: 42,
       lastUpdated: "2025-02-03",
     },
     {
       content:
-        "Section 5.1: Anti-Money Laundering (AML) Policies\nFinancial institutions are required to establish and maintain effective AML programs, including customer due diligence, transaction monitoring, and suspicious activity reporting.",
+        "5. Recordkeeping Requirements (§103.122(b)(3)) 5.1. Retention Period: Records must be maintained for a minimum of five years after the account is closed. 5.2. Required Records: The broker-dealer must retain records of: - The information obtained to verify the identity of the customer.\n - Any methods or results used in verifying identity.",
       source: "Financial Compliance Handbook",
       pageNo: 78,
       lastUpdated: "2025-01-28",
