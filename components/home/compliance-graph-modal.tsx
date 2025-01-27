@@ -505,7 +505,7 @@ export function ComplianceGraphModal({
                           {item.content}
                         </p>
                         <p className="text-xs font-semibold mb-1">
-                          Agency: Environmental Protection Agency
+                          Agency: Securities and Exchange Commission
                         </p>
                         <div className="text-xs text-gray-500">
                           <p>
@@ -517,10 +517,11 @@ export function ComplianceGraphModal({
                               }}
                               className="text-blue-600 hover:underline"
                             >
-                              Src: {item.source}, Page {item.pageNo}
+                              Src: [Final Rule] Customer Identification Programs
+                              for Broker-Dealers, Page {item.pageNo}
                             </a>
                           </p>
-                          <p>Last Updated: {item.lastUpdated}</p>
+                          <p>Last Updated: April 29, 2003</p>
                         </div>
                       </div>
                     ))}
