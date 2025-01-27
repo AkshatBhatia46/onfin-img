@@ -20,13 +20,113 @@ import { Checkbox } from "../ui/checkbox";
 import { AddAgentModal } from "./add-agent-modal";
 import { ComplianceGraphModal } from "./compliance-graph-modal";
 
+const agents: AgentData[] = [
+  {
+    name: "KYC Verification Agent",
+    tools: 5,
+    tasks: 2,
+    notificationCount: 3,
+    description1: "Validates customer identities, ensuring compliance with KYC requirements",
+    description2: "Assists with compliance tasks",
+    workflow: {
+      frequency: "hourly",
+      outputFormat: "json",
+      steps: [
+        { type: "Data Collection", description: "Gather customer KYC documents and information" },
+        { type: "Analysis", description: "Validate documents against regulatory requirements" },
+        { type: "Reporting", description: "Generate compliance verification reports" },
+        { type: "Notification", description: "Alert compliance officers of verification status" }
+      ]
+    },
+    notifications: {
+      conditions: "Alert on failed verifications, suspicious patterns, or incomplete documentation",
+      frequency: "realtime",
+      channels: ["Email", "Platform"]
+    },
+    selectedTools: [
+      { id: "document-processing", name: "Document Processing" },
+      { id: "data-analysis", name: "Data Analysis" },
+      { id: "api-access", name: "API Access" },
+      { id: "reporting", name: "Reporting" },
+      { id: "email-integration", name: "Email Integration" }
+    ]
+  },
+  {
+    name: "Regulatory Filing Agent",
+    tools: 3,
+    tasks: 1,
+    notificationCount: 0,
+    description1: "Automates official document submissions, guaranteeing accuracy and compliance",
+    description2: "Generates insights and reports",
+    workflow: {
+      frequency: "daily",
+      outputFormat: "xml",
+      steps: [
+        { type: "Data Collection", description: "Gather required filing data from systems" },
+        { type: "Analysis", description: "Validate data completeness and accuracy" },
+        { type: "Reporting", description: "Prepare regulatory filing documents" }
+      ]
+    },
+    notifications: {
+      conditions: "Alert on filing deadlines, submission errors, or regulatory updates",
+      frequency: "daily",
+      channels: ["Email", "Push Notifications"]
+    },
+    selectedTools: [
+      { id: "document-processing", name: "Document Processing" },
+      { id: "api-access", name: "API Access" },
+      { id: "reporting", name: "Reporting" }
+    ]
+  },
+  {
+    name: "KYC Actionable Tracking Agent",
+    tools: 4,
+    tasks: 0,
+    notificationCount: 1,
+    description1: "Tracks KYC tasks, ensuring resolution and regulatory adherence",
+    description2: "Recommends mitigation strategies",
+    workflow: {
+      frequency: "daily",
+      outputFormat: "json",
+      steps: [
+        { type: "Data Collection", description: "Monitor KYC task statuses and deadlines" },
+        { type: "Analysis", description: "Identify bottlenecks and compliance risks" },
+        { type: "Reporting", description: "Generate task progress reports" },
+        { type: "Notification", description: "Send reminders for pending tasks" }
+      ]
+    },
+    notifications: {
+      conditions: "Alert on overdue tasks, compliance risks, or process bottlenecks",
+      frequency: "daily",
+      channels: ["Email", "Platform", "Push Notifications"]
+    },
+    selectedTools: [
+      { id: "data-analysis", name: "Data Analysis" },
+      { id: "reporting", name: "Reporting" },
+      { id: "email-integration", name: "Email Integration" },
+      { id: "api-access", name: "API Access" }
+    ]
+  }
+];
+
 interface AgentData {
   name: string;
   tools: number;
   tasks: number;
-  notifications: number;
+  notificationCount: number;
   description1: string;
   description2: string;
+  workflow: {
+    frequency: string;
+    outputFormat: string;
+    steps: Array<{ type: string; description: string; }>;
+  };
+  notifications: {
+    conditions: string;
+    frequency: string;
+    channels: string[];
+  };
+  selectedTools: Array<{ id: string; name: string; }>;
 }
 
 export default function RegulationsInterface() {
@@ -155,35 +255,7 @@ export default function RegulationsInterface() {
           </h2>
         </div>
         <div className="space-y-1">
-          {[
-            {
-              name: "KYC Verification Agent",
-              tools: 5,
-              tasks: 2,
-              notifications: 3,
-              description1:
-                "Validates customer identities, ensuring compliance with KYC requirements",
-              description2: "Assists with compliance tasks",
-            },
-            {
-              name: "Regulatory Filing Agent",
-              tools: 3,
-              tasks: 1,
-              notifications: 0,
-              description1:
-                "Automates official document submissions, guaranteeing accuracy and compliance",
-              description2: "Generates insights and reports",
-            },
-            {
-              name: "KYC Actionable Tracking Agent",
-              tools: 4,
-              tasks: 0,
-              notifications: 1,
-              description1:
-                "Tracks KYC tasks, ensuring resolution and regulatory adherence",
-              description2: "Recommends mitigation strategies",
-            },
-          ].map((agent, index) => (
+          {agents.map((agent, index) => (
             <div
               key={index}
               className="flex flex-col p-2 border border-gray-200 rounded cursor-pointer hover:bg-gray-50"
@@ -211,7 +283,7 @@ export default function RegulationsInterface() {
                 </span>
                 <span className="flex items-center text-yellow-500">
                   <Bell className="h-4 w-4 mr-2" />
-                  {agent.notifications} Notifications
+                  {agent.notificationCount} Notifications
                 </span>
               </div>
             </div>

@@ -25,7 +25,18 @@ interface AddAgentModalProps {
     description2: string;
     tools: number;
     tasks: number;
-    notifications: number;
+    notificationCount: number;
+    workflow: {
+      frequency: string;
+      outputFormat: string;
+      steps: Array<{ type: string; description: string; }>;
+    };
+    notifications: {
+      conditions: string;
+      frequency: string;
+      channels: string[];
+    };
+    selectedTools: Array<{ id: string; name: string; }>;
   };
 }
 
@@ -46,16 +57,28 @@ export function AddAgentModal({
   const [taskDescription, setTaskDescription] = useState(
     prefillData ? `${prefillData.description1}. ${prefillData.description2}` : ""
   );
-  const [steps, setSteps] = useState<Step[]>([]);
+  const [steps, setSteps] = useState<Step[]>(prefillData?.workflow.steps || []);
   const [stepType, setStepType] = useState("");
   const [stepDescription, setStepDescription] = useState("");
-  const [selectedTools, setSelectedTools] = useState<Tool[]>([]);
+  const [selectedTools, setSelectedTools] = useState<Tool[]>(prefillData?.selectedTools || []);
   const [selectedToolId, setSelectedToolId] = useState("");
+  const [taskRunFrequency, setTaskRunFrequency] = useState(prefillData?.workflow.frequency || "");
+  const [outputFormat, setOutputFormat] = useState(prefillData?.workflow.outputFormat || "");
+  const [notificationConditions, setNotificationConditions] = useState(prefillData?.notifications.conditions || "");
+  const [notificationFrequency, setNotificationFrequency] = useState(prefillData?.notifications.frequency || "");
+  const [notificationChannels, setNotificationChannels] = useState<string[]>(prefillData?.notifications.channels || []);
 
   useEffect(() => {
     if (prefillData) {
       setAgentName(prefillData.name);
       setTaskDescription(`${prefillData.description1}. ${prefillData.description2}`);
+      setSteps(prefillData.workflow.steps);
+      setSelectedTools(prefillData.selectedTools);
+      setTaskRunFrequency(prefillData.workflow.frequency);
+      setOutputFormat(prefillData.workflow.outputFormat);
+      setNotificationConditions(prefillData.notifications.conditions);
+      setNotificationFrequency(prefillData.notifications.frequency);
+      setNotificationChannels(prefillData.notifications.channels);
     }
   }, [prefillData]);
 
@@ -219,6 +242,8 @@ export function AddAgentModal({
                   <select
                     id="taskRunFrequency"
                     className="w-full px-3 py-2 text-sm text-gray-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={taskRunFrequency}
+                    onChange={(e) => setTaskRunFrequency(e.target.value)}
                   >
                     <option value="">Select frequency</option>
                     <option value="hourly">Hourly</option>
@@ -237,6 +262,8 @@ export function AddAgentModal({
                   <select
                     id="expectedOutputFormat"
                     className="w-full px-3 py-2 text-sm text-gray-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={outputFormat}
+                    onChange={(e) => setOutputFormat(e.target.value)}
                   >
                     <option value="">Select output format</option>
                     <option value="json">JSON</option>
@@ -326,6 +353,8 @@ export function AddAgentModal({
                     className="w-full px-3 py-2 text-sm text-gray-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     rows={4}
                     placeholder="Specify conditions that trigger notifications..."
+                    value={notificationConditions}
+                    onChange={(e) => setNotificationConditions(e.target.value)}
                   ></textarea>
                 </div>
                 <div className="space-y-2">
@@ -338,6 +367,8 @@ export function AddAgentModal({
                   <select
                     id="notificationFrequency"
                     className="w-full px-3 py-2 text-sm text-gray-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={notificationFrequency}
+                    onChange={(e) => setNotificationFrequency(e.target.value)}
                   >
                     <option value="">Select frequency</option>
                     <option value="realtime">Real-time</option>
@@ -360,6 +391,16 @@ export function AddAgentModal({
                           <input
                             type="checkbox"
                             className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                            checked={notificationChannels.includes(channel)}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setNotificationChannels((prevChannels) => [...prevChannels, channel]);
+                              } else {
+                                setNotificationChannels((prevChannels) =>
+                                  prevChannels.filter((c) => c !== channel)
+                                );
+                              }
+                            }}
                           />
                           <span className="text-sm text-gray-700">
                             {channel}
@@ -373,12 +414,12 @@ export function AddAgentModal({
             </TabsContent>
           </Tabs>
         </div>
-        <div className="border-t p-4 flex justify-end">
+        {/* <div className="border-t p-4 flex justify-end">
           <Button variant="outline" onClick={onClose} className="mr-2">
             Cancel
           </Button>
           <Button>Add Agent</Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
