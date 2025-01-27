@@ -205,7 +205,7 @@ export function ComplianceGraphModal({
           date: "2025-01-14",
           dueDate: "2025-02-15",
           status: "in-progress",
-        }
+        },
       ],
       periodicity: "quarterly",
       priority: "High",
@@ -213,7 +213,7 @@ export function ComplianceGraphModal({
       reportingTo: ["CFO", "Compliance Officer"],
       tags: ["ESG", "Corporate Governance"],
       title: "ESG Compliance Report Q1 2025",
-      type: "Disclosure"
+      type: "Disclosure",
     },
     {
       actionableId: "6784f02e5a8f406c8ccc3421",
@@ -230,7 +230,7 @@ export function ComplianceGraphModal({
           date: "2025-01-15",
           dueDate: "2025-03-31",
           status: "in-progress",
-        }
+        },
       ],
       periodicity: "annual",
       priority: "Medium",
@@ -238,7 +238,7 @@ export function ComplianceGraphModal({
       reportingTo: ["Board of Directors", "Risk Committee"],
       tags: ["Risk Management", "Basel III"],
       title: "Annual Risk Assessment Report 2024",
-      type: "Documentation"
+      type: "Documentation",
     },
     {
       actionableId: "6784f02e5a8f406c8ccc3422",
@@ -254,8 +254,8 @@ export function ComplianceGraphModal({
           completedDate: null,
           date: "2025-01-10",
           dueDate: "2025-01-31",
-          status: "review"
-        }
+          status: "review",
+        },
       ],
       periodicity: "monthly",
       priority: "High",
@@ -263,7 +263,7 @@ export function ComplianceGraphModal({
       reportingTo: ["Company Secretary", "Legal Head"],
       tags: ["Corporate Filing", "Statutory Compliance"],
       title: "Monthly Corporate Governance Statement",
-      type: "Reporting"
+      type: "Reporting",
     },
     {
       actionableId: "6784f02e5a8f406c8ccc3423",
@@ -279,8 +279,8 @@ export function ComplianceGraphModal({
           completedDate: null,
           date: "2025-01-16",
           dueDate: "2025-04-15",
-          status: "in-progress"
-        }
+          status: "in-progress",
+        },
       ],
       periodicity: "quarterly",
       priority: "Medium",
@@ -288,7 +288,7 @@ export function ComplianceGraphModal({
       reportingTo: ["Fund Manager", "Investment Committee"],
       tags: ["Investment", "Portfolio Disclosure"],
       title: "Mutual Fund Portfolio Disclosure Q1",
-      type: "Disclosure"
+      type: "Disclosure",
     },
     {
       actionableId: "6784f02e5a8f406c8ccc3424",
@@ -304,8 +304,8 @@ export function ComplianceGraphModal({
           completedDate: null,
           date: "2025-01-12",
           dueDate: "2025-02-28",
-          status: "in-progress"
-        }
+          status: "in-progress",
+        },
       ],
       periodicity: "monthly",
       priority: "High",
@@ -313,8 +313,8 @@ export function ComplianceGraphModal({
       reportingTo: ["Appointed Actuary", "CEO"],
       tags: ["Insurance", "Actuarial"],
       title: "Monthly Actuarial Valuation Report",
-      type: "Reporting"
-    }
+      type: "Reporting",
+    },
   ];
 
   // const filteredCompanies = companies.filter(
@@ -362,28 +362,140 @@ export function ComplianceGraphModal({
     }
   };
 
-  const personDepartments = [
-    {
-      department: "Customer Onboarding",
-      name: "Mike Wilson",
-    },
-    {
-      department: "Regulatory Monitoring",
-      name: "Emma Davis",
-    },
-    {
-      department: "Surveillance",
-      name: "Robert Chen",
-    },
-    {
-      department: "Surveillance",
-      name: "Lisa Park",
-    },
-    {
-      department: "KYC",
-      name: "Sarah Johnson",
-    },
-  ];
+  const complianceStages = {
+    "Actionable Assigned": [
+      {
+        id: "sys-1",
+        title: "Account Opening System Modification",
+        description:
+          "Implement required field validation in account opening system",
+        assignee: "Mike Wilson",
+        department: "Customer Onboarding",
+        priority: "High",
+        dueDate: "2025-02-28",
+      },
+      {
+        id: "doc-1",
+        title: "Documentary Verification Checklist",
+        description: "Create verification checklist for US and non-US persons",
+        assignee: "Sarah Johnson",
+        department: "KYC",
+        priority: "High",
+        dueDate: "2025-02-15",
+      },
+      {
+        id: "mon-1",
+        title: "Suspicious Activity Monitoring Setup",
+        description: "Define SAR filing triggers and procedures",
+        assignee: "Robert Chen",
+        department: "Surveillance",
+        priority: "Medium",
+        dueDate: "2025-03-01",
+      },
+    ],
+    "Manner of Compliance Confirmed": [
+      {
+        id: "ver-1",
+        title: "Non-Documentary Verification Process",
+        description:
+          "Establish procedures for cases requiring additional verification",
+        assignee: "Emma Davis",
+        department: "Regulatory Monitoring",
+        priority: "High",
+        dueDate: "2025-02-20",
+      },
+      {
+        id: "edd-1",
+        title: "Enhanced Due Diligence Framework",
+        description: "Define risk-based EDD triggers and procedures",
+        assignee: "Lisa Park",
+        department: "Surveillance",
+        priority: "High",
+        dueDate: "2025-02-25",
+      },
+    ],
+    "Policy & Control Mapping Done": [
+      {
+        id: "rec-1",
+        title: "Record Retention Policy",
+        description:
+          "Establish retention schedules for different document types",
+        assignee: "Mike Wilson",
+        department: "Customer Onboarding",
+        priority: "Medium",
+        dueDate: "2025-03-15",
+      },
+      {
+        id: "erisa-1",
+        title: "ERISA Account Procedures",
+        description: "Document ERISA plan account identification process",
+        assignee: "Sarah Johnson",
+        department: "KYC",
+        priority: "Low",
+        dueDate: "2025-03-30",
+      },
+    ],
+    "Disclosure & Reporting Completed": [
+      {
+        id: "impl-1",
+        title: "Implementation Timeline",
+        description: "Document compliance timeline and transition procedures",
+        assignee: "Emma Davis",
+        department: "Regulatory Monitoring",
+        priority: "High",
+        dueDate: "2025-02-10",
+      },
+      {
+        id: "for-1",
+        title: "Foreign Business Documentation",
+        description: "Establish alternative documentation procedures",
+        assignee: "Robert Chen",
+        department: "Surveillance",
+        priority: "Medium",
+        dueDate: "2025-03-10",
+      },
+    ],
+    "Metric Tracking & Evidence Collection": [
+      {
+        id: "rel-1",
+        title: "Reliance Agreement Framework",
+        description: "Create templates for third-party reliance agreements",
+        assignee: "Lisa Park",
+        department: "Surveillance",
+        priority: "Medium",
+        dueDate: "2025-03-20",
+      },
+      {
+        id: "mon-2",
+        title: "Monitoring Metrics Setup",
+        description: "Define KPIs for CIP compliance monitoring",
+        assignee: "Emma Davis",
+        department: "Regulatory Monitoring",
+        priority: "High",
+        dueDate: "2025-02-28",
+      },
+    ],
+    "Evidence Review": [
+      {
+        id: "aud-1",
+        title: "Documentation Review Process",
+        description: "Establish procedures for periodic documentation review",
+        assignee: "Sarah Johnson",
+        department: "KYC",
+        priority: "Medium",
+        dueDate: "2025-03-25",
+      },
+      {
+        id: "rep-1",
+        title: "Compliance Report Template",
+        description: "Create standardized reporting format for evidence review",
+        assignee: "Robert Chen",
+        department: "Surveillance",
+        priority: "Low",
+        dueDate: "2025-04-01",
+      },
+    ],
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -505,79 +617,82 @@ export function ComplianceGraphModal({
                     <TabsContent value="deliverables" className="mt-4">
                       <div className="overflow-x-auto">
                         <div className="flex space-x-4 min-w-[2400px] p-4 h-full">
-                          {[
-                            "Actionable Assigned",
-                            "Manner of Compliance Confirmed",
-                            "Policy & Control Mapping Done",
-                            "Disclosure & Reporting Completed",
-                            "Metric Tracking & Evidence Collection",
-                            "Evidence Review",
-                          ].map((column, index) => (
-                            <Card key={index} className="flex-1 min-w-[400px]">
-                              <CardHeader>
-                                <CardTitle className="text-sm font-medium">
-                                  <h3 className="text-base font-semibold">
-                                    {column}
-                                  </h3>
-                                  <p className="text-xs text-gray-500 mt-1">
-                                    {column === "Actionable Assigned" &&
-                                      "Assign compliance tasks to team members, set responsibilities and deadlines for each aspect of compliance."}
-                                    {column ===
-                                      "Manner of Compliance Confirmed" &&
-                                      "Verify and document methods for meeting regulatory requirements, creating clear plans for each compliance need."}
-                                    {column ===
-                                      "Policy & Control Mapping Done" &&
-                                      "Review and align internal policies with regulatory controls, identifying and addressing any compliance gaps."}
-                                    {column ===
-                                      "Disclosure & Reporting Completed" &&
-                                      "Prepare and submit required compliance reports to authorities after internal review and approval."}
-                                    {column ===
-                                      "Metric Tracking & Evidence Collection" &&
-                                      "Monitor compliance metrics and gather supporting documentation, maintaining an organized repository for audits."}
-                                    {column === "Evidence Review" &&
-                                      "Assess collected evidence, cross-check against requirements, and prepare for potential regulatory audits or inspections."}
-                                  </p>
-                                  <div className="flex justify-between items-center mt-2 text-xs">
-                                    <span className="flex items-center">
-                                      <CheckSquare className="w-3 h-3 mr-1" />
-                                      Tasks: 5
-                                    </span>
-                                    <span className="flex items-center">
-                                      <Users className="w-3 h-3 mr-1" />
-                                      People: 3
-                                    </span>
-                                  </div>
-                                  <div className="flex justify-between items-center mt-1 text-xs">
-                                    <span className="text-green-500">
-                                      On time: 4/5
-                                    </span>
-                                    <span className="text-red-500">
-                                      Escalations: 1
-                                    </span>
-                                  </div>
-                                </CardTitle>
-                              </CardHeader>
-                              <CardContent className="space-y-2">
-                                {[1, 2, 3].map((item) => {
-                                  const randomDepartment =
-                                    personDepartments[
-                                      Math.floor(
-                                        Math.random() * personDepartments.length
-                                      )
-                                    ];
-                                  return (
-                                    <Card key={item} className="p-2">
-                                      <p className="text-sm">Task {item}</p>
-                                      <p className="text-xs text-muted-foreground font-medium">
-                                        {randomDepartment.name} -{" "}
-                                        {randomDepartment.department}
+                          {Object.entries(complianceStages).map(
+                            ([column, tasks], index) => (
+                              <Card
+                                key={index}
+                                className="flex-1 min-w-[400px]"
+                              >
+                                <CardHeader>
+                                  <CardTitle className="text-sm font-medium">
+                                    <h3 className="text-base font-semibold">
+                                      {column}
+                                    </h3>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                      {column === "Actionable Assigned" &&
+                                        "Assign compliance tasks to team members, set responsibilities and deadlines for each aspect of compliance."}
+                                      {column ===
+                                        "Manner of Compliance Confirmed" &&
+                                        "Verify and document methods for meeting regulatory requirements, creating clear plans for each compliance need."}
+                                      {column ===
+                                        "Policy & Control Mapping Done" &&
+                                        "Review and align internal policies with regulatory controls, identifying and addressing any compliance gaps."}
+                                      {column ===
+                                        "Disclosure & Reporting Completed" &&
+                                        "Prepare and submit required compliance reports to authorities after internal review and approval."}
+                                      {column ===
+                                        "Metric Tracking & Evidence Collection" &&
+                                        "Monitor compliance metrics and gather supporting documentation, maintaining an organized repository for audits."}
+                                      {column === "Evidence Review" &&
+                                        "Assess collected evidence, cross-check against requirements, and prepare for potential regulatory audits or inspections."}
+                                    </p>
+                                    <div className="flex justify-between items-center mt-2 text-xs">
+                                      <span className="flex items-center">
+                                        <CheckSquare className="w-3 h-3 mr-1" />
+                                        Tasks: {tasks.length}
+                                      </span>
+                                      <span className="flex items-center">
+                                        <Users className="w-3 h-3 mr-1" />
+                                        People:{" "}
+                                        {
+                                          new Set(tasks.map((t) => t.assignee))
+                                            .size
+                                        }
+                                      </span>
+                                    </div>
+                                  </CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-2">
+                                  {tasks.map((task) => (
+                                    <Card key={task.id} className="p-2">
+                                      <p className="text-sm font-medium">
+                                        {task.title}
                                       </p>
+                                      <p className="text-xs text-muted-foreground">
+                                        {task.assignee} - {task.department}
+                                      </p>
+                                      <div className="flex justify-between mt-1">
+                                        <span
+                                          className={`text-xs ${
+                                            task.priority === "High"
+                                              ? "text-red-500"
+                                              : task.priority === "Medium"
+                                              ? "text-yellow-500"
+                                              : "text-green-500"
+                                          }`}
+                                        >
+                                          {task.priority}
+                                        </span>
+                                        <span className="text-xs text-muted-foreground">
+                                          Due: {task.dueDate}
+                                        </span>
+                                      </div>
                                     </Card>
-                                  );
-                                })}
-                              </CardContent>
-                            </Card>
-                          ))}
+                                  ))}
+                                </CardContent>
+                              </Card>
+                            )
+                          )}
                         </div>
                       </div>
                     </TabsContent>
