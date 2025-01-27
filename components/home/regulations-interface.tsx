@@ -225,7 +225,7 @@ export default function RegulationsInterface() {
         <div className="flex w-full relative items-center space-x-2">
           <Badge
             variant="secondary"
-            className="absolute left-2 top-0 transform -translate-y-1/2"
+            className="absolute left-4 top-0 transform -translate-y-1/2"
           >
             <Bot className="w-3 h-3 mr-1" />
             ComplianceGPT
