@@ -31,6 +31,7 @@ import {
 import { useState } from "react";
 import OrgChart from "../OrgChart";
 import { Progress } from "../ui/progress";
+import { cn } from "@/lib/utils";
 
 // interface Company {
 //   id: string;
@@ -746,7 +747,16 @@ export function ComplianceGraphModal({
                               <h6 className="font-semibold text-sm">
                                 Priority
                               </h6>
-                              <p className="text-sm text-red-500">
+                              <p
+                                className={cn(
+                                  "text-sm",
+                                  reporting.priority === "High"
+                                    ? "text-red-500"
+                                    : reporting.priority === "Medium"
+                                    ? "text-yellow-500"
+                                    : "text-green-500"
+                                )}
+                              >
                                 {reporting.priority}
                               </p>
                             </div>
