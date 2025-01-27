@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, Trash2, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Step {
   type: string;
@@ -19,6 +19,14 @@ interface Tool {
 interface AddAgentModalProps {
   isOpen: boolean;
   onClose: () => void;
+  prefillData?: {
+    name: string;
+    description1: string;
+    description2: string;
+    tools: number;
+    tasks: number;
+    notifications: number;
+  };
 }
 
 const tools: Tool[] = [
@@ -29,12 +37,27 @@ const tools: Tool[] = [
   { id: "reporting", name: "Reporting" },
 ];
 
-export function AddAgentModal({ isOpen, onClose }: AddAgentModalProps) {
+export function AddAgentModal({
+  isOpen,
+  onClose,
+  prefillData,
+}: AddAgentModalProps) {
+  const [agentName, setAgentName] = useState(prefillData?.name || "");
+  const [taskDescription, setTaskDescription] = useState(
+    prefillData ? `${prefillData.description1}. ${prefillData.description2}` : ""
+  );
   const [steps, setSteps] = useState<Step[]>([]);
   const [stepType, setStepType] = useState("");
   const [stepDescription, setStepDescription] = useState("");
   const [selectedTools, setSelectedTools] = useState<Tool[]>([]);
   const [selectedToolId, setSelectedToolId] = useState("");
+
+  useEffect(() => {
+    if (prefillData) {
+      setAgentName(prefillData.name);
+      setTaskDescription(`${prefillData.description1}. ${prefillData.description2}`);
+    }
+  }, [prefillData]);
 
   if (!isOpen) return null;
 
@@ -73,7 +96,9 @@ export function AddAgentModal({ isOpen, onClose }: AddAgentModalProps) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg w-4/5 h-4/5 flex flex-col">
         <div className="flex justify-between items-center p-4 border-b">
-          <h2 className="text-xl font-semibold">Add New Agent</h2>
+          <h2 className="text-xl font-semibold">
+            {prefillData ? "Edit Agent" : "Add New Agent"}
+          </h2>
           <Button variant="ghost" size="icon" onClick={onClose}>
             <X className="h-4 w-4" />
           </Button>
@@ -104,6 +129,8 @@ export function AddAgentModal({ isOpen, onClose }: AddAgentModalProps) {
                     id="agentName"
                     placeholder="Enter agent name"
                     className="w-full"
+                    value={agentName}
+                    onChange={(e) => setAgentName(e.target.value)}
                   />
                 </div>
                 <div className="space-y-2">
@@ -118,6 +145,8 @@ export function AddAgentModal({ isOpen, onClose }: AddAgentModalProps) {
                     className="w-full px-3 py-2 text-sm text-gray-700 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     rows={4}
                     placeholder="Describe the agent's tasks"
+                    value={taskDescription}
+                    onChange={(e) => setTaskDescription(e.target.value)}
                   ></textarea>
                 </div>
                 <div className="space-y-2">

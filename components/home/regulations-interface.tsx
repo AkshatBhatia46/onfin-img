@@ -10,7 +10,6 @@ import {
   Calendar,
   Cpu,
   Paperclip,
-  Plus,
   Send,
   Sparkles,
   Wrench,
@@ -20,6 +19,16 @@ import { useState } from "react";
 import { Checkbox } from "../ui/checkbox";
 import { AddAgentModal } from "./add-agent-modal";
 import { ComplianceGraphModal } from "./compliance-graph-modal";
+
+interface AgentData {
+  name: string;
+  tools: number;
+  tasks: number;
+  notifications: number;
+  description1: string;
+  description2: string;
+}
+
 export default function RegulationsInterface() {
   const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
   const [isGraphModalOpen, setIsGraphModalOpen] = useState(false);
@@ -28,6 +37,7 @@ export default function RegulationsInterface() {
     false,
     false,
   ]);
+  const [selectedAgent, setSelectedAgent] = useState<AgentData | null>(null);
 
   return (
     <div className="h-screen w-full grid grid-cols-[300px_1fr_300px] grid-rows-[1fr_auto]">
@@ -40,14 +50,14 @@ export default function RegulationsInterface() {
           </h2>
           {[
             {
-              title:
-                "Review and update employee handbook for compliance regulations",
+              title: "Review 10 pending failed KYC verifications",
               status: "In Progress",
               dueDate: "2025-02-15",
               urgency: "High",
             },
             {
-              title: "Conduct annual safety training for all staff members",
+              title:
+                "Review new actionables on 'Customer Identification Programs' rules by SEBI",
               status: "Not Started",
               dueDate: "2025-03-01",
               urgency: "Medium",
@@ -105,7 +115,7 @@ export default function RegulationsInterface() {
           className="w-full justify-start h-12"
           onClick={() => setIsGraphModalOpen(true)}
         >
-          <Image src={Logo} alt="Logo" height={25} />
+          <Image src={Logo} alt="Logo" height={25} className="rounded-full" />
           Compliance OS
         </Button>
       </div>
@@ -143,45 +153,44 @@ export default function RegulationsInterface() {
             <Sparkles className="mr-2 h-4 w-4" />
             AI Agents
           </h2>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsAgentModalOpen(true)}
-          >
-            <Plus className="h-4 w-4 mr-1" />
-            Add Agent
-          </Button>
         </div>
         <div className="space-y-1">
           {[
             {
-              name: "Compliance Assistant",
+              name: "KYC Verification Agent",
               tools: 5,
               tasks: 2,
               notifications: 3,
-              description1: "Monitors regulatory changes",
+              description1:
+                "Validates customer identities, ensuring compliance with KYC requirements",
               description2: "Assists with compliance tasks",
             },
             {
-              name: "Data Analyzer",
+              name: "Regulatory Filing Agent",
               tools: 3,
               tasks: 1,
               notifications: 0,
-              description1: "Processes large datasets",
+              description1:
+                "Automates official document submissions, guaranteeing accuracy and compliance",
               description2: "Generates insights and reports",
             },
             {
-              name: "Risk Assessor",
+              name: "KYC Actionable Tracking Agent",
               tools: 4,
               tasks: 0,
               notifications: 1,
-              description1: "Evaluates potential risks",
+              description1:
+                "Tracks KYC tasks, ensuring resolution and regulatory adherence",
               description2: "Recommends mitigation strategies",
             },
           ].map((agent, index) => (
             <div
               key={index}
-              className="flex flex-col p-2 border border-gray-200 rounded"
+              className="flex flex-col p-2 border border-gray-200 rounded cursor-pointer hover:bg-gray-50"
+              onClick={() => {
+                setSelectedAgent(agent);
+                setIsAgentModalOpen(true);
+              }}
             >
               <div className="flex justify-between items-center">
                 <div>
@@ -211,7 +220,11 @@ export default function RegulationsInterface() {
       </div>
       <AddAgentModal
         isOpen={isAgentModalOpen}
-        onClose={() => setIsAgentModalOpen(false)}
+        onClose={() => {
+          setIsAgentModalOpen(false);
+          setSelectedAgent(null);
+        }}
+        prefillData={selectedAgent || undefined}
       />
       <ComplianceGraphModal
         isOpen={isGraphModalOpen}
