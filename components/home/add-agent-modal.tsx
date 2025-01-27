@@ -53,20 +53,18 @@ export function AddAgentModal({
   onClose,
   prefillData,
 }: AddAgentModalProps) {
-  const [agentName, setAgentName] = useState(prefillData?.name || "");
-  const [taskDescription, setTaskDescription] = useState(
-    prefillData ? `${prefillData.description1}. ${prefillData.description2}` : ""
-  );
-  const [steps, setSteps] = useState<Step[]>(prefillData?.workflow.steps || []);
+  const [agentName, setAgentName] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [steps, setSteps] = useState<Step[]>([]);
   const [stepType, setStepType] = useState("");
   const [stepDescription, setStepDescription] = useState("");
-  const [selectedTools, setSelectedTools] = useState<Tool[]>(prefillData?.selectedTools || []);
+  const [selectedTools, setSelectedTools] = useState<Tool[]>([]);
   const [selectedToolId, setSelectedToolId] = useState("");
-  const [taskRunFrequency, setTaskRunFrequency] = useState(prefillData?.workflow.frequency || "");
-  const [outputFormat, setOutputFormat] = useState(prefillData?.workflow.outputFormat || "");
-  const [notificationConditions, setNotificationConditions] = useState(prefillData?.notifications.conditions || "");
-  const [notificationFrequency, setNotificationFrequency] = useState(prefillData?.notifications.frequency || "");
-  const [notificationChannels, setNotificationChannels] = useState<string[]>(prefillData?.notifications.channels || []);
+  const [taskRunFrequency, setTaskRunFrequency] = useState("");
+  const [outputFormat, setOutputFormat] = useState("");
+  const [notificationConditions, setNotificationConditions] = useState("");
+  const [notificationFrequency, setNotificationFrequency] = useState("");
+  const [notificationChannels, setNotificationChannels] = useState<string[]>([]);
 
   useEffect(() => {
     if (prefillData) {
@@ -79,6 +77,16 @@ export function AddAgentModal({
       setNotificationConditions(prefillData.notifications.conditions);
       setNotificationFrequency(prefillData.notifications.frequency);
       setNotificationChannels(prefillData.notifications.channels);
+    } else {
+      setAgentName("");
+      setTaskDescription("");
+      setSteps([]);
+      setSelectedTools([]);
+      setTaskRunFrequency("");
+      setOutputFormat("");
+      setNotificationConditions("");
+      setNotificationFrequency("");
+      setNotificationChannels([]);
     }
   }, [prefillData]);
 
@@ -414,12 +422,12 @@ export function AddAgentModal({
             </TabsContent>
           </Tabs>
         </div>
-        {/* <div className="border-t p-4 flex justify-end">
+        <div className="border-t p-4 flex justify-end">
           <Button variant="outline" onClick={onClose} className="mr-2">
             Cancel
           </Button>
           <Button>Add Agent</Button>
-        </div> */}
+        </div>
       </div>
     </div>
   );

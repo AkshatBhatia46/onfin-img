@@ -13,6 +13,7 @@ import {
   Send,
   Sparkles,
   Wrench,
+  Plus,
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -253,6 +254,17 @@ export default function RegulationsInterface() {
             <Sparkles className="mr-2 h-4 w-4" />
             AI Agents
           </h2>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => {
+              setSelectedAgent(null);
+              setIsAgentModalOpen(true);
+            }}
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Add Agent
+          </Button>
         </div>
         <div className="space-y-1">
           {agents.map((agent, index) => (
