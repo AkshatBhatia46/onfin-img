@@ -32,6 +32,8 @@ import { useState } from "react";
 import OrgChart from "../OrgChart";
 import { Progress } from "../ui/progress";
 import { cn } from "@/lib/utils";
+import Logo from "@/app/assets/icon.png";
+import Image from "next/image";
 
 // interface Company {
 //   id: string;
@@ -206,7 +208,7 @@ export function ComplianceGraphModal({
           date: "2025-01-14",
           dueDate: "2025-02-15",
           status: "review",
-        }
+        },
       ],
       periodicity: "one-time",
       priority: "High",
@@ -214,7 +216,7 @@ export function ComplianceGraphModal({
       reportingTo: ["Compliance Officer", "Legal Department"],
       tags: ["KYC", "Customer Disclosure"],
       title: "Customer Identity Verification Notice Implementation",
-      type: "Disclosure"
+      type: "Disclosure",
     },
     {
       actionableId: "6784f02e5a8f406c8ccc3421",
@@ -231,7 +233,7 @@ export function ComplianceGraphModal({
           date: "2025-01-15",
           dueDate: "2025-03-31",
           status: "in-progress",
-        }
+        },
       ],
       periodicity: "annual",
       priority: "High",
@@ -239,8 +241,8 @@ export function ComplianceGraphModal({
       reportingTo: ["Board of Directors", "Compliance Officer"],
       tags: ["Third Party Reliance", "CIP"],
       title: "CIP Reliance Agreement and Certification",
-      type: "Documentation"
-    }
+      type: "Documentation",
+    },
   ];
 
   // const filteredCompanies = companies.filter(
@@ -429,7 +431,8 @@ export function ComplianceGraphModal({
         className="w-[95vw] h-[95vh] max-w-none max-h-none p-0 flex flex-col"
         style={{ maxWidth: "95vw", maxHeight: "95vh" }}
       >
-        <DialogHeader className="flex flex-row items-center justify-between border-b p-4">
+        <DialogHeader className="flex flex-row items-center gap-2 border-b p-4">
+          <Image src={Logo} alt="Logo" height={25} />
           <DialogTitle className="text-xl">ComplianceOS</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col h-full overflow-hidden">

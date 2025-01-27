@@ -1,8 +1,9 @@
-"use client"
+"use client";
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import Logo from "@/app/assets/icon.png";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Bell,
   Bot,
@@ -12,18 +13,21 @@ import {
   Plus,
   Send,
   Sparkles,
-  Workflow,
-  Wrench
-} from "lucide-react"
-import { useState } from "react"
-import { Checkbox } from "../ui/checkbox"
-import { AddAgentModal } from "./add-agent-modal"
-import { ComplianceGraphModal } from "./compliance-graph-modal"
-
+  Wrench,
+} from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+import { Checkbox } from "../ui/checkbox";
+import { AddAgentModal } from "./add-agent-modal";
+import { ComplianceGraphModal } from "./compliance-graph-modal";
 export default function RegulationsInterface() {
-  const [isAgentModalOpen, setIsAgentModalOpen] = useState(false)
-  const [isGraphModalOpen, setIsGraphModalOpen] = useState(false)
-  const [checkedTasks, setCheckedTasks] = useState<boolean[]>([false, false, false])
+  const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
+  const [isGraphModalOpen, setIsGraphModalOpen] = useState(false);
+  const [checkedTasks, setCheckedTasks] = useState<boolean[]>([
+    false,
+    false,
+    false,
+  ]);
 
   return (
     <div className="h-screen w-full grid grid-cols-[300px_1fr_300px] grid-rows-[1fr_auto]">
@@ -36,7 +40,8 @@ export default function RegulationsInterface() {
           </h2>
           {[
             {
-              title: "Review and update employee handbook for compliance regulations",
+              title:
+                "Review and update employee handbook for compliance regulations",
               status: "In Progress",
               dueDate: "2025-02-15",
               urgency: "High",
@@ -56,7 +61,7 @@ export default function RegulationsInterface() {
           ].map((task, index) => (
             <div key={index} className="p-2 border-b last:border-b-0">
               <div className="flex items-center mb-1">
-                <Checkbox 
+                <Checkbox
                   className="mr-2 h-4 w-4 text-gray-500 flex-shrink-0"
                   checked={checkedTasks[index]}
                   onCheckedChange={(checked) => {
@@ -65,7 +70,11 @@ export default function RegulationsInterface() {
                     setCheckedTasks(newCheckedTasks);
                   }}
                 />
-                <span className={`font-medium text-sm ${checkedTasks[index] ? 'line-through text-gray-400' : ''}`}>
+                <span
+                  className={`font-medium text-sm ${
+                    checkedTasks[index] ? "line-through text-gray-400" : ""
+                  }`}
+                >
                   {task.title}
                 </span>
               </div>
@@ -80,8 +89,8 @@ export default function RegulationsInterface() {
                         task.urgency === "High"
                           ? "bg-red-500"
                           : task.urgency === "Medium"
-                            ? "bg-yellow-500"
-                            : "bg-green-500"
+                          ? "bg-yellow-500"
+                          : "bg-green-500"
                       }`}
                     ></span>
                     <span>{task.urgency} Priority</span>
@@ -91,8 +100,12 @@ export default function RegulationsInterface() {
             </div>
           ))}
         </div>
-        <Button variant="outline" className="w-full justify-start h-12" onClick={() => setIsGraphModalOpen(true)}>
-          <Workflow className="mr-1 h-4 w-4" />
+        <Button
+          variant="outline"
+          className="w-full justify-start h-12"
+          onClick={() => setIsGraphModalOpen(true)}
+        >
+          <Image src={Logo} alt="Logo" height={25} />
           Compliance OS
         </Button>
       </div>
@@ -100,15 +113,24 @@ export default function RegulationsInterface() {
       {/* Main Content Area */}
       <div className="border-y border-r border-border p-4 flex items-end">
         <div className="flex w-full relative items-center space-x-2">
-          <Badge variant="secondary" className="absolute left-2 top-0 transform -translate-y-1/2">
+          <Badge
+            variant="secondary"
+            className="absolute left-2 top-0 transform -translate-y-1/2"
+          >
             <Bot className="w-3 h-3 mr-1" />
             ComplianceGPT
           </Badge>
-          <Input placeholder="Type your message here..." className="flex-1 pr-24 py-6 pl-2" />
+          <Input
+            placeholder="Type your message here..."
+            className="flex-1 pr-24 py-6 pl-2"
+          />
           <button className="absolute right-14 top-1/2 transform -translate-y-1/2 p-2 text-gray-500 hover:text-gray-700 focus:outline-none">
             <Paperclip className="h-4 w-4" />
           </button>
-          <Button size="icon" className="absolute right-2 top-1/2 transform -translate-y-1/2">
+          <Button
+            size="icon"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2"
+          >
             <Send className="h-4 w-4" />
           </Button>
         </div>
@@ -121,7 +143,11 @@ export default function RegulationsInterface() {
             <Sparkles className="mr-2 h-4 w-4" />
             AI Agents
           </h2>
-          <Button variant="outline" size="sm" onClick={() => setIsAgentModalOpen(true)}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsAgentModalOpen(true)}
+          >
             <Plus className="h-4 w-4 mr-1" />
             Add Agent
           </Button>
@@ -153,7 +179,10 @@ export default function RegulationsInterface() {
               description2: "Recommends mitigation strategies",
             },
           ].map((agent, index) => (
-            <div key={index} className="flex flex-col p-2 border border-gray-200 rounded">
+            <div
+              key={index}
+              className="flex flex-col p-2 border border-gray-200 rounded"
+            >
               <div className="flex justify-between items-center">
                 <div>
                   <span className="font-medium">{agent.name}</span>
@@ -180,9 +209,14 @@ export default function RegulationsInterface() {
           ))}
         </div>
       </div>
-      <AddAgentModal isOpen={isAgentModalOpen} onClose={() => setIsAgentModalOpen(false)} />
-      <ComplianceGraphModal isOpen={isGraphModalOpen} onClose={() => setIsGraphModalOpen(false)} />
+      <AddAgentModal
+        isOpen={isAgentModalOpen}
+        onClose={() => setIsAgentModalOpen(false)}
+      />
+      <ComplianceGraphModal
+        isOpen={isGraphModalOpen}
+        onClose={() => setIsGraphModalOpen(false)}
+      />
     </div>
-  )
+  );
 }
-
