@@ -287,6 +287,29 @@ export function ComplianceGraphModal({
     }
   };
 
+  const personDepartments = [
+    {
+      department: "Customer Onboarding",
+      name: "Mike Wilson",
+    },
+    {
+      department: "Regulatory Monitoring",
+      name: "Emma Davis",
+    },
+    {
+      department: "Surveillance",
+      name: "Robert Chen",
+    },
+    {
+      department: "Surveillance",
+      name: "Lisa Park",
+    },
+    {
+      department: "KYC",
+      name: "Sarah Johnson",
+    },
+  ];
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent
@@ -460,14 +483,23 @@ export function ComplianceGraphModal({
                                 </CardTitle>
                               </CardHeader>
                               <CardContent className="space-y-2">
-                                {[1, 2, 3].map((item) => (
-                                  <Card key={item} className="p-2">
-                                    <p className="text-sm">Task {item}</p>
-                                    <p className="text-xs text-muted-foreground">
-                                      Details for task {item}
-                                    </p>
-                                  </Card>
-                                ))}
+                                {[1, 2, 3].map((item) => {
+                                  const randomDepartment =
+                                    personDepartments[
+                                      Math.floor(
+                                        Math.random() * personDepartments.length
+                                      )
+                                    ];
+                                  return (
+                                    <Card key={item} className="p-2">
+                                      <p className="text-sm">Task {item}</p>
+                                      <p className="text-xs text-muted-foreground font-medium">
+                                        {randomDepartment.name} -{" "}
+                                        {randomDepartment.department}
+                                      </p>
+                                    </Card>
+                                  );
+                                })}
                               </CardContent>
                             </Card>
                           ))}
