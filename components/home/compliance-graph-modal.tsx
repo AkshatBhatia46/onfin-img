@@ -192,54 +192,129 @@ export function ComplianceGraphModal({
   const reportingDisclosures = [
     {
       actionableId: "6784f02e5a8f406c8ccc3420",
-      circularId: "989/2024",
-      completionPercentage: 0,
+      circularId: "SEBI/HO/2024/12",
+      completionPercentage: 75,
       documents: [],
-      dueDate: "2025-01-31",
+      dueDate: "2025-02-15",
       id: "6785f106330e82f7ab5ba0e6",
-      isDisclosure: false,
-      logs: [
-        {
-          comment: "Reporting initiated",
-          completedDate: null,
-          date: "2025-01-14",
-          dueDate: "2025-01-31",
-          status: "in-progress",
-        },
-      ],
-      periodicity: "monthly",
-      priority: "High",
-      regulator: "NSE",
-      reportingTo: ["CTO", "Department Head", "Compliance Officer", "Admin"],
-      tags: ["GSM securities"],
-      title: "Review compliance documentation",
-      type: "Disclosure",
-    },
-    {
-      actionableId: "6784f02e5a8f406c8ccc3420",
-      circularId: "989/2024",
-      completionPercentage: 0,
-      documents: [],
-      dueDate: "2025-01-31",
-      id: "6788e2a2d1caaf11e979f13e",
       isDisclosure: true,
       logs: [
         {
-          comment: "Disclosure initiated",
+          comment: "Quarterly filing in progress",
           completedDate: null,
-          date: "2025-01-16",
-          dueDate: "2025-01-31",
+          date: "2025-01-14",
+          dueDate: "2025-02-15",
           status: "in-progress",
-        },
+        }
+      ],
+      periodicity: "quarterly",
+      priority: "High",
+      regulator: "SEBI",
+      reportingTo: ["CFO", "Compliance Officer"],
+      tags: ["ESG", "Corporate Governance"],
+      title: "ESG Compliance Report Q1 2025",
+      type: "Disclosure"
+    },
+    {
+      actionableId: "6784f02e5a8f406c8ccc3421",
+      circularId: "RBI/2024/31",
+      completionPercentage: 45,
+      documents: [],
+      dueDate: "2025-03-31",
+      id: "6785f106330e82f7ab5ba0e7",
+      isDisclosure: true,
+      logs: [
+        {
+          comment: "Data collection initiated",
+          completedDate: null,
+          date: "2025-01-15",
+          dueDate: "2025-03-31",
+          status: "in-progress",
+        }
+      ],
+      periodicity: "annual",
+      priority: "Medium",
+      regulator: "RBI",
+      reportingTo: ["Board of Directors", "Risk Committee"],
+      tags: ["Risk Management", "Basel III"],
+      title: "Annual Risk Assessment Report 2024",
+      type: "Documentation"
+    },
+    {
+      actionableId: "6784f02e5a8f406c8ccc3422",
+      circularId: "MCA/2024/08",
+      completionPercentage: 90,
+      documents: [],
+      dueDate: "2025-01-31",
+      id: "6785f106330e82f7ab5ba0e8",
+      isDisclosure: false,
+      logs: [
+        {
+          comment: "Final review pending",
+          completedDate: null,
+          date: "2025-01-10",
+          dueDate: "2025-01-31",
+          status: "review"
+        }
       ],
       periodicity: "monthly",
       priority: "High",
-      regulator: "NSE",
-      reportingTo: ["CTO"],
-      tags: ["GSM securities"],
-      title: "Review compliance documentation",
-      type: "Documentation",
+      regulator: "MCA",
+      reportingTo: ["Company Secretary", "Legal Head"],
+      tags: ["Corporate Filing", "Statutory Compliance"],
+      title: "Monthly Corporate Governance Statement",
+      type: "Reporting"
     },
+    {
+      actionableId: "6784f02e5a8f406c8ccc3423",
+      circularId: "SEBI/IMD/2024/15",
+      completionPercentage: 30,
+      documents: [],
+      dueDate: "2025-04-15",
+      id: "6785f106330e82f7ab5ba0e9",
+      isDisclosure: true,
+      logs: [
+        {
+          comment: "Initial draft prepared",
+          completedDate: null,
+          date: "2025-01-16",
+          dueDate: "2025-04-15",
+          status: "in-progress"
+        }
+      ],
+      periodicity: "quarterly",
+      priority: "Medium",
+      regulator: "SEBI",
+      reportingTo: ["Fund Manager", "Investment Committee"],
+      tags: ["Investment", "Portfolio Disclosure"],
+      title: "Mutual Fund Portfolio Disclosure Q1",
+      type: "Disclosure"
+    },
+    {
+      actionableId: "6784f02e5a8f406c8ccc3424",
+      circularId: "IRDAI/LIFE/2024/03",
+      completionPercentage: 60,
+      documents: [],
+      dueDate: "2025-02-28",
+      id: "6785f106330e82f7ab5ba0ea",
+      isDisclosure: true,
+      logs: [
+        {
+          comment: "Actuarial validation in progress",
+          completedDate: null,
+          date: "2025-01-12",
+          dueDate: "2025-02-28",
+          status: "in-progress"
+        }
+      ],
+      periodicity: "monthly",
+      priority: "High",
+      regulator: "IRDAI",
+      reportingTo: ["Appointed Actuary", "CEO"],
+      tags: ["Insurance", "Actuarial"],
+      title: "Monthly Actuarial Valuation Report",
+      type: "Reporting"
+    }
   ];
 
   // const filteredCompanies = companies.filter(
@@ -563,7 +638,7 @@ export function ComplianceGraphModal({
                           </div>
                           <div className="border-t border-gray-200 pt-6 mt-6">
                             <Progress
-                              value={Math.floor(Math.random() * 100)}
+                              value={reporting.completionPercentage}
                               className="w-full"
                             />
                           </div>
